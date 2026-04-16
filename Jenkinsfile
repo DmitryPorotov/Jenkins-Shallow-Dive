@@ -51,7 +51,7 @@ pipeline{
                 }
                 stage('Archive'){
                             steps {
-                    archiveArtifacts artifacts: 'dist', onlySuccessful: true
+                    archiveArtifacts artifacts: 'dist', onlyIfSuccessful: true
                         }
                 }
             }
