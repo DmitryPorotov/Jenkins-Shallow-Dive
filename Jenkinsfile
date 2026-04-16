@@ -26,6 +26,7 @@ pipeline{
                         }
                     }
                 stage('Test') {
+                    steps {
                         sh'''
                             python3 ./app.py
                             if curl localhost:8080 > /dev/null 2>&1
@@ -39,14 +40,19 @@ pipeline{
                             fi
                         '''
                         }
+                    }
                 stage('Build'){
+                    steps {
                     sh '''
                         chmod +x -R /home/jenkins/.local/pipx/venvs/pyinstaller
                         /home/jenkins/.local/pipx/venvs/pyinstaller -y  app.py
                     '''
+                    }
                 }
                 stage('Archive'){
+                            steps {
                     archiveArtifacts artifacts: 'dist', onlySuccessful: true
+                        }
                 }
             }
         }
