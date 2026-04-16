@@ -48,6 +48,5 @@ pipeline{
                 stage('Archive'){
                     archiveArtifacts artifacts: 'dist', onlySuccessful: true
                 }
-                    }
             }
-}
+        }
