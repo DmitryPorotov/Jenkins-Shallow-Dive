@@ -9,7 +9,6 @@ pipeline{
                                                                     python3 \
                                                                     python3-pip \
                                                                     pipx
-                                                                    python3-pep8 \
                                                                     python3-flask \
                                                                     pipenv  \
                                                                     pylint  \
