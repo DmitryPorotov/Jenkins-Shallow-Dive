@@ -41,7 +41,7 @@ pipeline{
                 sh '''
                     python3 app.py &
 		            chmod 777 -R  /home/jenkins/.local/bin/pyinstaller
-		            /home/jenkins/.local/bin/pyinstaller  app.py
+		            /home/jenkins/.local/bin/pyinstaller -y  app.py
                 '''
             }// error with pyinstaller
         }
