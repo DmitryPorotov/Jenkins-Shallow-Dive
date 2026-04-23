@@ -1,6 +1,6 @@
 
 pipeline{
-    agent any
+    agent {label 'deb'}
 
     stages{
         stage('Pre-Build'){
@@ -45,7 +45,7 @@ pipeline{
             steps{
                 echo 'Testing'
                 sh'''
-                    if curl localhost:8000 &> /dev/null;then
+                    if curl localhost:8080 &> /dev/null;then
                         echo 'post test: success'
                     else
                         echo 'post test: fail'
@@ -60,13 +60,15 @@ pipeline{
                 '''
             }
         }
-        stage('Archive'){
-            steps{
-                echo 'Archiving the artifact'
-                sleep 2
-                archiveArtifacts artifacts: 'dist', onlyIfSuccessful: true
-            } // error with what to artifact
-        }
-    }
+ 	   post {
+        	unsuccessful{
+            	cleanWs cleanWhenSuccess: false
+       		 	}
+        	successful{
+            		archiveArtifacts artifacts: '/home/jenkins/workspace/flask/dist/app', followSymlinks: false, onlyIfSuccessful: true      
+        		}
+    		}
+
+    	}
 }
 
