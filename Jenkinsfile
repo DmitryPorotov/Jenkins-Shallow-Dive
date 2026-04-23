@@ -10,7 +10,7 @@ pipeline{
         stage('Pre-Build'){
             steps{
                 echo 'Checking pre-requisites'
-                sleep 2
+                sleep "${params.sleep_time}"
                 sh'''
                     . /etc/os-release
                     if [ $ID == 'debian' ];then
@@ -27,7 +27,7 @@ pipeline{
         stage('Linter'){
             steps{
                 echo 'Static code analysis check'
-                sleep 2
+                sleep "${params.sleep_time}"
                 sh '''
 	
                     pylint --disable=missing-docstring,invalid-name app.py 
@@ -37,7 +37,7 @@ pipeline{
         stage('Build'){
             steps{
                 echo 'Building the Project'
-                sleep 2
+                sleep "${params.sleep_time}"
                 sh '''
                     python3 app.py &
 		            chmod 777 -R  /home/jenkins/.local/bin/pyinstaller
@@ -48,6 +48,7 @@ pipeline{
         stage('Test'){
             steps{
                 echo 'Testing'
+                sleep "${params.sleep_time}"
                 sh'''
                     if curl localhost:8080 &> /dev/null;then
                         echo 'post test: success'
