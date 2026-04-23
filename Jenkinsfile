@@ -28,8 +28,8 @@ pipeline{
 	
                     pylint --disable=missing-docstring,invalid-name app.py 
                 '''
-            } //error with artifact
-        }
+	    } //error with artifact
+	}
         stage('Build'){
             steps{
                 echo 'Building the Project'
@@ -59,7 +59,7 @@ pipeline{
                     fi
                 '''
             }
-        }
+        
  	   post {
         	unsuccessful{
             	cleanWs cleanWhenSuccess: false
