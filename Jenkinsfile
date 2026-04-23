@@ -66,7 +66,7 @@ pipeline{
             	cleanWs cleanWhenSuccess: false
        		 	}
         	success{
-            		archiveArtifacts artifacts: '/home/jenkins/workspace/flask/dist/app', followSymlinks: false, onlyIfSuccessful: true      
+            		archiveArtifacts artifacts: 'dist/app', followSymlinks: false, onlyIfSuccessful: true      
         		}
     		}
 
