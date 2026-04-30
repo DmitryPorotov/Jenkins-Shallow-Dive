@@ -8,12 +8,13 @@ pipeline{
 
     stages{
         stage('Pre-Build'){
-            steps{
                 agent {
-                    docker {
-                        image 'python:3.11'
-                    }
+                        {
+                    image 'python:3.11'
                 }
+            }
+            steps{
+        
                 echo 'Checking pre-requisites'
                 sleep "${params.sleep_time}"
                 sh'''
@@ -30,6 +31,11 @@ pipeline{
             }
         }
         stage('Linter'){
+                    agent {
+                         {
+                        image 'python:3.11'
+                    }
+                }
             steps{
                 echo 'Static code analysis check'
                 sleep "${params.sleep_time}"
@@ -40,6 +46,11 @@ pipeline{
 	    } //error with artifact
 	}
         stage('Build'){
+                    agent {
+                         {
+                        image 'python:3.11'
+                    }
+                }
             steps{
                 echo 'Building the Project'
                 sleep "${params.sleep_time}"
@@ -51,6 +62,11 @@ pipeline{
             }// error with pyinstaller
         }
         stage('Test'){
+                    agent {
+                         {
+                        image 'python:3.11'
+                    }
+                }
             steps{
                 echo 'Testing'
                 sleep "${params.sleep_time}"
