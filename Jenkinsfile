@@ -2,13 +2,19 @@
 pipeline{
     parameters{
         string(name: 'sleep_time', defaultValue: '2', description:'time to sleep')
-        choice(name: 'Agent_name', choices: ['deb', 'win'], description:'Pick a agent to run on ')
+        choice(name: 'Agent_name', choices: ['deb','debs','fedora', 'win'], description:'Pick a agent to run on ')
     }
-    agent { label "${params.Agent_name}"}
+    agent any
 
     stages{
         stage('Pre-Build'){
             steps{
+                agent {
+                    docker {
+                        image 'python:3.11'
+                        args  '-u root'
+                    }
+                }
                 echo 'Checking pre-requisites'
                 sleep "${params.sleep_time}"
                 sh'''
