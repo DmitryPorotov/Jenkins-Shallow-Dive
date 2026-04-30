@@ -12,7 +12,6 @@ pipeline{
                 agent {
                     docker {
                         image 'python:3.11'
-                        args  '-u root'
                     }
                 }
                 echo 'Checking pre-requisites'
